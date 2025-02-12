@@ -4,23 +4,24 @@ import java.util.Set;
 
 import br.com.joaogcm.entity.Cliente;
 
-public class RetornoDTO {
+public class RetornoClienteDTO {
 
 	private Set<Cliente> clientes;
 	private Cliente cliente;
+
 	private String mensagem;
 
-	public RetornoDTO(Set<Cliente> clientes, String mensagem) {
+	public RetornoClienteDTO(Set<Cliente> clientes, String mensagem) {
 		this.clientes = clientes;
 		this.mensagem = mensagem;
 	}
 
-	public RetornoDTO(Cliente cliente, String mensagem) {
+	public RetornoClienteDTO(Cliente cliente, String mensagem) {
 		this.cliente = cliente;
 		this.mensagem = mensagem;
 	}
 
-	public RetornoDTO(String mensagem) {
+	public RetornoClienteDTO(String mensagem) {
 		this.mensagem = mensagem;
 	}
 

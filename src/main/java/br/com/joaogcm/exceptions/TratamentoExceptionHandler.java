@@ -49,13 +49,26 @@ public class TratamentoExceptionHandler {
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<Object> validacaoDeErrosMethodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request) {
+	public ResponseEntity<Object> validacaoDeErrosMethodArgumentNotValid(MethodArgumentNotValidException e,
+			HttpServletRequest request) {
 		Integer status = HttpStatus.BAD_REQUEST.value();
-		String erro = "Argumentos inválidos para um dos campos.";
+		String erro = "Argumentos inválidos para um ou todos campos.";
 		String mensagem = e.getMessage();
-		
+
 		StandardError standardError = new StandardError(status, erro, mensagem, request.getRequestURI());
-		
+
+		return ResponseEntity.status(status).body(standardError);
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Object> validacaoDeErrosIllegalArgument(IllegalArgumentException e,
+			HttpServletRequest request) {
+		Integer status = HttpStatus.BAD_REQUEST.value();
+		String erro = "Argumentos inválidos para um ou todos campos.";
+		String mensagem = e.getMessage();
+
+		StandardError standardError = new StandardError(status, erro, mensagem, request.getRequestURI());
+
 		return ResponseEntity.status(status).body(standardError);
 	}
 }

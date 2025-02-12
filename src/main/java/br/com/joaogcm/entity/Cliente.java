@@ -1,14 +1,18 @@
 package br.com.joaogcm.entity;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -45,6 +49,9 @@ public class Cliente implements Serializable {
 	@Size(max = 50, message = "A senha deve ter o máximo de 50 caracteres.")
 	@Column(name = "senha")
 	private String senha;
+
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+	private Set<Pedido> pedidos = new LinkedHashSet<Pedido>();
 
 	public Cliente() {
 
@@ -96,5 +103,13 @@ public class Cliente implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 }
